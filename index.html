@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0b1f14" />
+    <title>한판 맞고</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@500;700;900&family=Noto+Serif+KR:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="canvas-host"></div>
+    <div id="stage">
+      <div id="hud"></div>
+      <div id="title" class="hidden">
+        <div class="fan" aria-hidden="true">
+          <img src="cards/01-gwang.webp" alt="" style="--i: 0; --r: -28deg; --y: 36px" />
+          <img src="cards/03-gwang.webp" alt="" style="--i: 1; --r: -14deg; --y: 10px" />
+          <img src="cards/08-gwang.webp" alt="" style="--i: 2; --r: 0deg; --y: 0px" />
+          <img src="cards/11-gwang.webp" alt="" style="--i: 3; --r: 14deg; --y: 10px" />
+          <img src="cards/12-gwang.webp" alt="" style="--i: 4; --r: 28deg; --y: 36px" />
+        </div>
+        <div class="title-inner">
+          <div class="logo"><span class="l1">한판</span><span class="l2">맞고</span></div>
+          <p class="tag">손맛 찰진 1인용 고스톱</p>
+          <div class="seg">
+            <button data-v="easy">초급</button>
+            <button data-v="normal">중급</button>
+            <button data-v="hard">고급</button>
+          </div>
+          <button id="start" class="btn huge go"><span class="big-label">게임 시작</span></button>
+          <p class="money"></p>
+          <p class="fair">공정한 난수로 섞습니다 · 패 조작 없음 · 광고 없음</p>
+        </div>
+      </div>
+    </div>
+    <div id="loading">
+      <div class="logo"><span class="l1">한판</span><span class="l2">맞고</span></div>
+      <div class="bar"><i></i></div>
+    </div>
+    <div id="rotate">
+      <div class="icon">📱</div>
+      <div>휴대폰을 가로로 돌려 주세요</div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
