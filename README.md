@@ -118,6 +118,15 @@ work/
   판을 바꾼다. 이벤트와 판 상태는 보는 사람 기준(0 = 나)이고 상대 손패와 더미는 가린 카드다.
 - ZLink 공식 문서: https://docs.zlink.systems/llms.txt, 고른 언어의 서버 가이드, TypeScript stream-connector 브라우저 가이드.
   템플릿에 고정된 버전의 API만 쓴다.
+- 메시지 직렬화 규칙(서버 메시지 레코드를 처음 만들기 전에): https://docs.zlink.systems 의 메시지 모델 스펙(05-message-model).
+  - null이 될 수 있는 필드는 nullable로 표시한다(Java·Kotlin `@Nullable`). `@ZLinkJsonOptional`은 필드 생략만 허용하며 null은 거절된다.
+  - 64비트 정수(Java `long` 등)는 JSON에서 10진 문자열로만 오간다. 브라우저 클라이언트는 숫자가 아니라 문자열로 보낸다
+    (예: `handNumber: "1"`). Java·.NET connector는 자동으로 바꿔 주므로 서버 e2e만으로는 드러나지 않는다.
+- 나가기처럼 보낸 직후 연결을 닫는 동작은 send가 아니라 request로 만들고, 응답을 받은 뒤 연결을 닫는다.
+  send 직후 닫으면 서버가 그 메시지를 처리하지 못할 수 있다.
+- 재접속은 이전 tableId로 테이블을 새로 만들지 않는다. 서버가 재시작·교체된 뒤 그 테이블이 없으면 자리 없음으로 거절하고 매칭으로 돌려보낸다.
+- 템플릿 README의 알려진 문제를 먼저 읽는다. drain(update) 확인에 약 30초가 걸리므로 진행 중인 판의 턴 시계는 그동안 끝날 수 있다.
+  update 시험은 끝난 판을 옮겨 확인하고, 남은 시간 이전은 도메인 검사로 확인한다.
 
 서버(my-game/)
 1. 게임 규칙: 템플릿의 기본 게임 규칙을 맞고로 바꾼다. 판정은 zlink-matgo-demo/src/features/matgo_game/model/의
